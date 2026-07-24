@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "declarationMap": false,
+    "verbatimModuleSyntax": true,
+    "strict": true,
+    "declaration": true,
+    "stripInternal": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "types": ["node"],
+    "lib": ["ES2022"],
+    "newLine": "LF"
+  }
+}
