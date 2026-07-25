@@ -1,0 +1,43 @@
+name: Upgrade deps
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - run: pnpm install --no-frozen-lockfile
+
+      - name: Upgrade all dependencies to latest
+        run: pnpm up --latest
+
+      - run: pnpm install --no-frozen-lockfile
+
+      - run: pnpm build
+
+      - run: pnpm lint
+
+      - run: pnpm format
+
+      - run: pnpm test
+
+      - name: Push upgrade branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B deps/upgrade-latest
+          git add -A
+          git commit -m "chore(deps): upgrade to latest and add committed lockfile"
+          git push -f -u origin deps/upgrade-latest
